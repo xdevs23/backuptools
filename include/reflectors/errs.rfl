@@ -1,0 +1,15 @@
+#!/bin/bash
+
+reflectorName "Error messages"
+reflectorId   "err_msg"
+
+function reflect() {
+  echo -en "$CL_LRED"
+  case $1 in
+    not_impl)
+      echo "This feature is currently not implemented."
+      ;;
+    *);;
+  esac
+  echo -en "$CL_RESET"
+}

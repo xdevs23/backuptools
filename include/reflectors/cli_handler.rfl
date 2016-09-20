@@ -1,0 +1,9 @@
+#!/bin/bash
+
+reflectorName "CLI Handler"
+reflectorId   "cli_handler"
+
+function reflect() {
+  echo -e "$EF_BOLD""Welcome to the $REFLECTOR_NAME!""$CL_RESET"
+  run err_msg not_impl
+}

@@ -1,0 +1,59 @@
+#!/bin/bash
+# Above line can be ommitted
+
+# Explanation of reflectors:
+#
+# A reflector is a kind of module which can be
+# called using the 'reflect' include:
+#
+# include reflect
+#
+# You need the line above to use reflectors.
+# Note: inside of reflectors you don't need to include reflect.
+#       sourced scripts also don't need to include it if the parent
+#       script has included it.
+#
+# Every reflector must have either a reflector name
+# or a reflector id or both. Calling a reflector works
+# as follows:
+#
+# run example param1 param2 param3
+#
+# In this case we are calling the reflector "example"
+# with params "param1 param2 param3".
+# Here, "example" is either the reflector name or
+# reflector id. It can also be both.
+# As you can see below it is the reflector id.
+# The reflector name would be "Example"
+# The difference between reflector names and id's
+# is that reflector id's are not allowed to contain spaces
+# (if they do, anything after the space will be ignored)
+# and names can contain anything.
+#
+# So that is how it works...
+#
+# TL;DR: Specify a reflectorName and/or a reflectorId
+#        and you will be able to call it like this:
+#
+#        run reflectorName param1 param2 param3
+#        or
+#        run reflectorId param1 param2
+#        or
+#        run reflectorName
+#        ...
+#
+#        You just need to include reflect in the script
+#        you want to use it.
+#
+
+# Name of this reflector (can contain spaces)
+reflectorName "Example"
+# ID of the reflector
+reflectorId   "example"
+
+# Entry point of reflectors.
+# This function must be implemented
+# in all reflectors
+function reflect() {
+  echo "Hello World from reflector $REFLECTOR_NAME"
+}
