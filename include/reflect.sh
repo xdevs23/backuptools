@@ -17,8 +17,8 @@ function run() {
   allargs="$@"
   reflector="$1"
   reflectargs="${allargs//$reflector /}"
-  for sc in $(ls $REFLECTORS_PATH/); do
-    source $REFLECTORS_PATH/$sc
+  for sc in $(find $REFLECTORS_PATH/ -type f); do
+    source $sc
     if [ "$REFLECTOR_NAME" == "$reflector" ] ||
        [ "$REFLECTOR_ID"   == "$reflector" ]; then
       reflect $reflectargs
