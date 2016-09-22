@@ -1,7 +1,7 @@
 ## Backup tools for Android devices
 
 Copyright (C) 2016 Simao Gomes Viana
-
+<br /><br />
 
 Licensed under the Creative Commons Attribution-ShareAlike 4.0 International Public License (CC BY-SA 4.0)
 
