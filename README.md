@@ -1,4 +1,4 @@
-## Backup tools for android devices
+## Backup tools for Android devices
 
 Copyright (C) 2016 Simao Gomes Viana
 
