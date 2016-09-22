@@ -9,6 +9,7 @@ if [ -f "$MAIN_ENTRY_POINT_CFG" ]; then
 else
   export MAIN_ENTRY_POINT="script/main.sh"
 fi
+export PRODUCT_SPEC_CONFIGURE=""
 
 function ProductName() {
   export PRODUCT_NAME="$@"
@@ -24,4 +25,8 @@ function ProductCmdDeps() {
 
 function MainEntryPoint() {
   export MAIN_ENTRY_POINT="$@"
+}
+
+function ProductConfigure() {
+  export PRODUCT_SPEC_CONFIGURE="$@"
 }

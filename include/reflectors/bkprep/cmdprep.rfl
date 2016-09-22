@@ -1,0 +1,17 @@
+#!/bin/bash
+
+reflectorName "Preparation of commands (installation etc.)"
+reflectorId   "bktools_cmd_prep_inst"
+
+function reflect() {
+  case $1 in
+    adb);;
+    tar);;
+    amdd) echo "Amdd installed.";;
+    *)
+      source $TOP/script/configure $1 err
+      return 127
+      ;;
+  esac
+  return 0
+}

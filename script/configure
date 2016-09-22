@@ -1,9 +1,20 @@
 #!/bin/bash
 
+local arg="$2"
+
 checkcmd() {
   if ! hash $1 2>/dev/null; then
-    echo -e "$EF_BOLD$CL_LRED""Error: $CL_RESET$CL_LYELLOW$EF_BOLD""$1 not found! Please install it.$CL_RESET"
-    exit 1
+    if [ "$arg" == "err" ] || [ "$2" == "fin" ]; then
+      echo -e "$EF_BOLD$CL_LRED""Error: $CL_RESET$CL_LYELLOW$EF_BOLD""$1 not found! Please install it.$CL_RESET"
+      exit 1
+    fi
+    if [ -z "$PRODUCT_SPEC_CONFIGURE" ]; then
+      arg="err"
+      checkall
+      exit 1
+    fi
+    run $PRODUCT_SPEC_CONFIGURE $1
+    checkcmd $1 fin
   fi
 }
 
@@ -13,4 +24,8 @@ checkcmds() {
   done
 }
 
-checkcmds $PRODUCT_CMD_DEPS
+checkall() {
+  checkcmds $PRODUCT_CMD_DEPS
+}
+
+checkall
