@@ -1,0 +1,16 @@
+#!/bin/bash
+
+checkcmd() {
+  if ! hash $1 2>/dev/null; then
+    echo -e "$EF_BOLD$CL_LRED""Error: $CL_RESET$CL_LYELLOW$EF_BOLD""$1 not found! Please install it.$CL_RESET"
+    exit 1
+  fi
+}
+
+checkcmds() {
+  for cmd in $@; do
+    checkcmd $cmd
+  done
+}
+
+checkcmds $PRODUCT_CMD_DEPS
