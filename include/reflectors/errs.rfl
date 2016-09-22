@@ -9,6 +9,12 @@ function reflect() {
     not_impl)
       echo "This feature is currently not implemented."
       ;;
+    cmd_not_found|command_not_found)
+      [ ! -z "$2" ] && \
+      echo -e "$CL_YELLOW""Command""$CL_RESET$EF_BOLD" \
+              "$2""$CL_RESET$CL_YELLOW"" unknown or not found!" \
+              "$CL_RESET"
+      ;;
     *);;
   esac
   echo -en "$CL_RESET"

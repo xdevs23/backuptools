@@ -1,0 +1,12 @@
+#!/bin/bash
+
+reflectorName "Command Handler"
+reflectorId   "cmd_handler"
+
+function reflect() {
+  # Here is where all commands are handled
+  # Each command has a reflector, which, again,
+  # handles arguments for it. So you are actually
+  # totally free what matters this.
+  return 0
+}

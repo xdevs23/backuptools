@@ -3,7 +3,47 @@
 reflectorName "CLI Handler"
 reflectorId   "cli_handler"
 
+function cli_readprintpipe() {
+  while true; do
+    if [ -f /tmp/xdshcli.pipe ]; then
+      if read line </tmp/xdshcli.pipe; then
+        if ! [[ "$line" == *": command not found"*  ]]; then
+          echo -e "$line"
+        fi
+      fi
+    fi
+  done
+}
+
 function reflect() {
-  echo -e "$EF_BOLD""Welcome to the $REFLECTOR_NAME!""$CL_RESET"
-  run err_msg not_impl
+  args=""
+  if [ "$1" == "interactive" ]; then
+    echo -e "$EF_BOLD""Welcome to the $REFLECTOR_NAME!""$CL_RESET"
+    while true; do
+      echo -en "$CL_XOS""backuptools""$CL_RESET$EF_BOLD"">""$CL_RESET "
+      read userinput
+      args="$userinput"
+      cmd=""
+      for stuff in $userinput; do
+        cmd="$stuff"
+        break;
+      done
+      case "$cmd" in
+        exit|quit|q|leave|stop|kill)
+          echo -e "\n$CL_LGREEN""Goodbye.""$CL_RESET"
+          return 0
+          ;;
+        clear)
+          $cmd;;
+        *)
+          run err_msg cmd_not_found $cmd
+         ;;
+      esac
+      run cmd_handler $args
+    done
+  else
+    shift
+    args="$@"
+  fi
+  run cmd_handler $args
 }
