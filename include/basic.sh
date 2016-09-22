@@ -9,6 +9,7 @@ function include() {
 include reflect
 include colors
 include precheck
+include product_config
 
 doprecheck
 if [ ! $? -eq 0 ]; then
