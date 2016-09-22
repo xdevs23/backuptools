@@ -7,7 +7,6 @@ function reflect() {
   case $1 in
     adb);;
     tar);;
-    amdd) echo "Amdd installed.";;
     *)
       source $TOP/script/configure $1 err
       return 127
