@@ -1,0 +1,8 @@
+#!/bin/bash
+
+reflectorName "Placeholder used to trigger the pre-check for reflection on runtime"
+reflectorId   "reflect_rt_precheck"
+
+function reflect() {
+  return 0
+}

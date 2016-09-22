@@ -1,7 +1,5 @@
 #!/bin/bash
 
-include reflect
-
 function main() {
   ARGS="$@"
 
