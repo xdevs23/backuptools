@@ -14,6 +14,16 @@ function getdynamic() {
   varname="$1"
   echo -n ${!varname}
 }
+
+logfifoname="xdbfw_log_d.pipe"
+mkfifo /tmp/$logfifoname 2>/dev/null || true
+
+function logd() {
+  [ "$XDBFW_LOGD_ENABLED" == "1" ] && echo "$@">/tmp/$logfifoname
+}
+
+logd "logd available!"
+
 include reflect
 include colors
 include precheck
