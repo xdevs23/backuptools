@@ -6,6 +6,14 @@ function include() {
   done
 }
 
+function declaredynamic() {
+  declare $1=$2
+}
+
+function getdynamic() {
+  varname="$1"
+  echo -n ${!varname}
+}
 include reflect
 include colors
 include precheck
