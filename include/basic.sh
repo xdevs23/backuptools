@@ -22,6 +22,10 @@ function logd() {
   [ "$XDBFW_LOGD_ENABLED" == "1" ] && echo "$@">/tmp/$logfifoname
 }
 
+function logt() {
+  logd "[$REFLECTOR_NAME] $@"
+}
+
 logd "logd available!"
 
 include reflect
