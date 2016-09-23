@@ -6,6 +6,13 @@ function include() {
   done
 }
 
+# Thanks http://mivok.net/2009/09/20/bashfunctionoverrist.html
+function save_function() {
+    local ORIG_FUNC=$(declare -f $1)
+    local NEWNAME_FUNC="$2${ORIG_FUNC#$1}"
+    eval "$NEWNAME_FUNC"
+}
+
 function declaredynamic() {
   declare $1=$2
 }
