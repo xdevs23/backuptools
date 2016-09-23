@@ -14,7 +14,10 @@ function save_function() {
 }
 
 function declaredynamic() {
-  declare $1=$2
+  varname="$1"
+  shift
+  varvalue="$@"
+  export $varname="$varvalue"
 }
 
 function getdynamic() {
