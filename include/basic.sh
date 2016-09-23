@@ -22,6 +22,22 @@ function getdynamic() {
   echo -n ${!varname}
 }
 
+function associateCmd() {
+  logd "Associating command $1 with reflector $REFLECTOR_ID"
+  local command="$1"
+  local command="${command/-/___DASH___}"
+  declaredynamic COMMAND_${command}_RUNPOINT $REFLECTOR_ID
+}
+
+function getReflectorForCmd() {
+  logd "Retrieving reflector for command $1"
+  local command="$1"
+  local command="${command/-/___DASH___}"
+  local refl="$(getdynamic COMMAND_${command}_RUNPOINT)"
+  logd "Found reflector \"$refl\""
+  echo -n $refl
+}
+
 logfifoname="xdbfw_log_d.pipe"
 mkfifo /tmp/$logfifoname 2>/dev/null || true
 
