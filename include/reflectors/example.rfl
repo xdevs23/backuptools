@@ -8,9 +8,12 @@
 #
 # include reflect
 #
-# You need the line above to use reflectors.
+# Tip: you USUALLY don't need to include reflect as
+#      'basic' is included in most cases and that include
+#      automatically includes 'reflect' and more.
+#
 # Note: inside of reflectors you don't need to include reflect.
-#       sourced scripts also don't need to include it if the parent
+#       Sourced scripts also don't need to include it if the parent
 #       script has included it.
 #
 # Every reflector must have either a reflector name
