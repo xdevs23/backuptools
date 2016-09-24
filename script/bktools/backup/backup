@@ -1,0 +1,28 @@
+#!/bin/bash
+
+reflectorName "Backup command forwarder"
+reflectorId   "bktools_backup_cmd_fwd"
+
+associateCmd "backup"
+cmdHelpText  "Backup functionality. Type 'backup help' for help"
+
+function registerBackupModule() {
+  declaredynamic BKTOOLS_BACKUP_MODULE_${1} $REFLECTOR_ID
+}
+
+function getBackupModuleId() {
+  echo -n "$(getdynamic BKTOOLS_BACKUP_MODULE_${1})"
+}
+
+function reflect() {
+  logt "Hello. Args: $@"
+  if [ -z "$1" ]; then
+    echo -e "${CL_CYAN}Let's go for the ${EF_BOLD}easy\033[21m way${CL_RESET}"
+  fi
+  local bkmodule="$1"
+  shift
+  local modid="$(getBackupModuleId $bkmodule)"
+  logt "Resolved reflector: $modid"
+  run $modid $@
+  return $?
+}
