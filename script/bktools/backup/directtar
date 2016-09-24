@@ -1,0 +1,11 @@
+#!/bin/bash
+
+reflectorName "Direct Tar Compression Backup"
+reflectorId   "bktools_backup_c_directtar"
+
+registerBackupModule directtar
+
+function reflect() {
+  logt "Hello."
+  return 0
+}
