@@ -8,13 +8,15 @@ function main() {
   source $TOP/script/configure
 
   logd "Starting cli handling"
+  local resultcode=0
   if [ -z "$1" ]; then
     run cli_handler interactive
   else
     run cli_handler direct $@
   fi
+  resultcode=$?
 
   logd "Exiting main script."
-  return 0
+  return $resultcode
 }
 

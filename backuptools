@@ -27,8 +27,10 @@ source $TOP/script/config/product.config
 source $MAIN_ENTRY_POINT $@
 
 # Start
+mainresult=0
 main
+mainresult=$?
 
 # kthxbye
 echo ""
-exit 0
+exit $mainresult
