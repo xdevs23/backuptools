@@ -44,6 +44,6 @@ function reflect() {
 As you can see, you can specify a name and an ID. An ID is **always** required, otherwise the reflector can not be called.
 `associateCmd` associates the given command with your reflector.<br />
 `cmdHelpText` associates the given help text with your command. In that way you don't have to manually write and maintain a separate help text for your commands.<br />
-Just write the help text into the reflector and you are ready to go.
+Just write the help text for your command into the reflector and you are ready to go.
 
 And by the way: this is just bash!
