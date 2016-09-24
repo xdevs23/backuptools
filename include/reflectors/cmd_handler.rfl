@@ -8,12 +8,16 @@ function reflect() {
   # Each command has a reflector, which, again,
   # handles arguments for it. So you are actually
   # totally free what matters this.
+  logt "Entered, received command $1"
   local arg1="$1"
   local reflforcmd="$(getReflectorForCmd $arg1)"
+  logt "Checking if command exists"
   if [ -z "$reflforcmd" ]; then
+    logt "Command not found: $arg1"
     return 127
   fi
   shift
+  logt "Running command..."
   run $reflforcmd $@
   return 0
 }
