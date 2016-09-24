@@ -1,7 +1,9 @@
 #!/bin/bash
 
 reflectorName "Command example"
-reflectorId "xdbfw_cmd_example"
+reflectorId   "xdbfw_cmd_example"
+
+markAsExample
 
 associateCmd "example-cmd"
 cmdHelpText "Just an example command to demonstrate how it works"
