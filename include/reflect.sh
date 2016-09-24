@@ -40,7 +40,6 @@ function run_internal() {
     local reflfn="${sc/$REFLECTOR_PATH\//}"
     if [[ "$reflfn" == *".pointer" ]]; then
       local point="$(cat $sc)"
-      log "Found pointer to $point"
       CURRENT_REFLECTORS_PATH="$TOP/$point"
       run_internal $breakoo $allargs
       CURRENT_REFLECTORS_PATH="$REFLECTORS_PATH"
