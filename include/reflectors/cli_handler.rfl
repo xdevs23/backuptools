@@ -44,6 +44,6 @@ function reflect() {
   else
     shift
     args="$@"
+    run cmd_handler $args
   fi
-  run cmd_handler $args
 }
