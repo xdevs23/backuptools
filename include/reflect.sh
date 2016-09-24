@@ -53,6 +53,7 @@ function run_internal() {
        [ "$REFLECTOR_ID"   == "$reflector" ]; then
       log " => Reflecting!"
       reflect $reflectargs
+      reflectresult=$?
       if [ $breakoo -eq $rfl_break_oo ]; then
         log " => Reflection of $reflfn finished"
         break
