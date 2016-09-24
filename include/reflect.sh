@@ -1,6 +1,7 @@
 #!/bin/bash
 
-REFLECTORS_PATH="$TOP/include/reflectors"
+        REFLECTORS_PATH="$TOP/include/reflectors"
+CURRENT_REFLECTORS_PATH="$REFLECTORS_PATH"
 
 export REFLECTOR_NAME=""
 export REFLECTOR_ID=""
@@ -39,8 +40,16 @@ function run_internal() {
   local reflector="$1"
   local reflectargs="${allargs//$reflector /}"
   log "Requested reflector: $reflector"
-  for sc in $(find $REFLECTORS_PATH/ -type f); do
+  for sc in $(find $CURRENT_REFLECTORS_PATH/ -type f); do
     local reflfn="${sc/$REFLECTOR_PATH\//}"
+    if [[ "$reflfn" == *".pointer" ]]; then
+      local point="$(cat $sc)"
+      log "Found pointer to $point"
+      CURRENT_REFLECTORS_PATH="$TOP/$point"
+      run_internal $breakoo $allargs
+      CURRENT_REFLECTORS_PATH="$REFLECTORS_PATH"
+      continue
+    fi
     log "Found reflector $reflfn"
     source $sc
     log "Checking reflector"
