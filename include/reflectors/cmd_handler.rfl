@@ -8,5 +8,12 @@ function reflect() {
   # Each command has a reflector, which, again,
   # handles arguments for it. So you are actually
   # totally free what matters this.
+  local arg1="$1"
+  local reflforcmd="$(getReflectorForCmd $arg1)"
+  if [ -z "$reflforcmd" ]; then
+    return 127
+  fi
+  shift
+  run $reflforcmd $@
   return 0
 }
