@@ -23,7 +23,7 @@ Just create the file, give it an ID and a name, and put it in the reflectors fol
 Now you can call your reflector file from anywhere just using its ID or name:
 
 ```
-run example
+run super_example_cmd "SuperArgument"
 ```
 
 You also can very easily associate a command to it. In that way you can very quickly organize your commands in different files. Inside a reflector:
@@ -37,6 +37,7 @@ cmdHelpText  "This is an example command."
 
 function reflect() {
   echo "Hello from the super example!"
+  echo "You have passed the argument $1 to me."
 }
 ```
 
