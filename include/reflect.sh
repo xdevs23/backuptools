@@ -73,4 +73,5 @@ function clean_reflection() {
   # Reset
   reflectorName
   reflectorId
+  unset reflect
 }
