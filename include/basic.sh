@@ -78,7 +78,11 @@ function logt() {
   logd "[$REFLECTOR_NAME] $@"
 }
 
+logd "Welcome."
 logd "logd available!"
+
+logd "Logging enabled: $XDBFW_LOGD_ENABLED"
+logd "Good to go."
 
 include reflect
 include colors
