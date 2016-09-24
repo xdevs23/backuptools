@@ -49,6 +49,10 @@ function run_internal() {
       echo -e "\033[91mReflector $reflfln is invalid or failed!\033[0m"
       break
     fi
+    if isReflectorExample; then
+      log "Reflector is an example, skipping."
+      continue
+    fi
     if [ "$REFLECTOR_NAME" == "$reflector" ] ||
        [ "$REFLECTOR_ID"   == "$reflector" ]; then
       log " => Reflecting!"

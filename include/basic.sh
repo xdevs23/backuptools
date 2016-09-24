@@ -27,7 +27,17 @@ function getdynamic() {
   echo -n ${!varname}
 }
 
+function markAsExample() {
+  declaredynamic REFL_${REFLECTOR_ID}_ISEXAMPLE 1
+}
+
+function isReflectorExample() {
+  [ "$(getdynamic REFL_${REFLECTOR_ID}_ISEXAMPLE)" == "1" ] && \
+  [ "$PRODUCT_DISABLE_EXAMPLES" == "1" ]
+}
+
 function cmdHelpText() {
+  isReflectorExample && return 0
   logd "Associating help text with reflector $REFLECTOR_ID"
   local tcommand="$(getdynamic COMMAND_${REFLECTOR_ID}_ASSOC_CMD)"
   local command="${tcommand/-/___DASH___}"
@@ -40,6 +50,7 @@ function cmdHelpText() {
 }
 
 function associateCmd() {
+  isReflectorExample && return 0
   logd "Associating command $1 with reflector $REFLECTOR_ID"
   local tcommand="$1"
   local command="${tcommand/-/___DASH___}"
