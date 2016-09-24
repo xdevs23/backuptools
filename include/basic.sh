@@ -46,7 +46,7 @@ function cmdHelpText() {
     return 0
   fi
   declaredynamic COMMAND_${command}_HAS_HELP 1
-  export MAIN_COMMANDS_HELP="$MAIN_COMMANDS_HELP$tcommand      $@\n"
+  export MAIN_COMMANDS_HELP="$MAIN_COMMANDS_HELP$tcommand\t$@\n"
 }
 
 function associateCmd() {
