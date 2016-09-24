@@ -33,7 +33,7 @@ function reflect() {
           echo -e "\n$CL_LGREEN""Goodbye.""$CL_RESET"
           return 0
           ;;
-        help|h|halp|idk|man|manual|showall|commands|cmds|?)
+        help|h|halp|idk|man|manual|showall|commands|cmds|'?')
           echo -e "\n${EF_BOLD}Help for ${EF_DIM}${PRODUCT_NAME}${CL_RESET}\n"
           echo -e "$MAIN_COMMANDS_HELP";;
         clear)
