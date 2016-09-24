@@ -1,0 +1,12 @@
+#!/bin/bash
+
+reflectorName "Command example"
+reflectorId   "xdbfw_cmd_example"
+
+associateCmd "example-cmd"
+
+function reflect() {
+  logt "GOT CALLED"
+  echo "You just ran the example command!"
+  echo "Congratulations, you won the new nobel prize."
+}
