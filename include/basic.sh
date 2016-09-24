@@ -42,10 +42,10 @@ function getReflectorForCmd() {
 }
 
 logfifoname="xdbfw_log_d.pipe"
-mkfifo /tmp/$logfifoname 2>/dev/null || true
+[ "$XDBFW_LOGD_ENABLED" == "1" ] && mkfifo /tmp/$logfifoname 2>/dev/null || true
 
 function logd() {
-  [ "$XDBFW_LOGD_ENABLED" == "1" ] && echo "$@">/tmp/$logfifoname
+  [ "$XDBFW_LOGD_ENABLED" == "1" ] && echo "$@">/tmp/$logfifoname || true
 }
 
 function logt() {
