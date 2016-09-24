@@ -54,6 +54,8 @@ reflectorName "Example"
 # ID of the reflector
 reflectorId   "example"
 
+markAsExample
+
 # Entry point of reflectors.
 # This function must be implemented
 # in all reflectors
