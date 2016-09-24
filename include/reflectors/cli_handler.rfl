@@ -36,10 +36,10 @@ function reflect() {
         clear)
           $cmd;;
         *)
-          run err_msg cmd_not_found $cmd
+          run cmd_handler $cmd
+          [ $? -eq 127 ] && run err_msg cmd_not_found $cmd
          ;;
       esac
-      run cmd_handler $args
     done
   else
     shift
