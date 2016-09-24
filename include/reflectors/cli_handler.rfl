@@ -3,18 +3,6 @@
 reflectorName "CLI Handler"
 reflectorId   "cli_handler"
 
-function cli_readprintpipe() {
-  while true; do
-    if [ -f /tmp/xdshcli.pipe ]; then
-      if read line </tmp/xdshcli.pipe; then
-        if ! [[ "$line" == *": command not found"*  ]]; then
-          echo -e "$line"
-        fi
-      fi
-    fi
-  done
-}
-
 function reflect() {
   args=""
   if [ "$1" == "interactive" ]; then
