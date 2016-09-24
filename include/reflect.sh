@@ -35,7 +35,8 @@ function run_internal() {
   local reflectresult=0
   local allargs="$@"
   local reflector="$1"
-  local reflectargs="${allargs//$reflector /}"
+  shift 1
+  local reflectargs="$@"
   for sc in $(find $CURRENT_REFLECTORS_PATH/ -type f); do
     local reflfn="${sc/$REFLECTOR_PATH\//}"
     if [[ "$reflfn" == *".pointer" ]]; then

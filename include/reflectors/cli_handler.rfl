@@ -4,17 +4,18 @@ reflectorName "CLI Handler"
 reflectorId   "cli_handler"
 
 function reflect() {
-  args=""
+  local args=""
   if [ "$1" == "interactive" ]; then
     echo -e "$EF_BOLD""Welcome to the $REFLECTOR_NAME!""$CL_RESET"
     while true; do
       echo -en "$CL_XOS""backuptools""$CL_RESET$EF_BOLD"">""$CL_RESET "
       read userinput
-      args="$userinput"
-      cmd=""
+      local cmd=""
+      local fixrmb=0
       for stuff in $userinput; do
-        cmd="$stuff"
-        break;
+        [ $fixrmb -eq 0 ] && \
+           cmd="$stuff" && fixrmb=1 \
+        || local args="$args $stuff"
       done
       case "$cmd" in
         exit|quit|q|leave|stop|kill)
@@ -25,9 +26,9 @@ function reflect() {
           echo -e "\n${EF_BOLD}Help for ${EF_DIM}${PRODUCT_NAME}${CL_RESET}\n"
           echo -e "$MAIN_COMMANDS_HELP";;
         clear)
-          $cmd;;
+          $cmd $args;;
         *)
-          run cmd_handler $cmd
+          run cmd_handler $cmd $args
           [ $? -eq 127 ] && run err_msg cmd_not_found $cmd
          ;;
       esac
