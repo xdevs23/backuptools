@@ -14,7 +14,7 @@ function main() {
   else
     run cli_handler direct $@
   fi
-  resultcode=$?
+  local resultcode=$?
 
   logd "Exiting main script."
   return $resultcode
