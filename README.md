@@ -18,7 +18,7 @@ But this does not just contain backup tools, it also has a full-featured bash fr
 They are easy to use and very automated.
 <br />
 A great example are the way reflectors and commands work.<br />
-You don't need to worry about absolute paths and stuff like that.
+You don't need to worry about absolute paths and stuff like that.<br />
 Just create the file, give it an ID and a name, and put it in the reflectors folder.
 Now you can call your reflector file from anywhere just using its ID or name:
 
@@ -41,9 +41,9 @@ function reflect() {
 }
 ```
 
-As you can see, you can specify a name and an ID. An ID is **always** required, otherwise the reflector can not be called.
+As you can see, you can specify a name and an ID. An ID is **always** required, otherwise the reflector can not be called.<br />
 `associateCmd` associates the given command with your reflector.<br />
 `cmdHelpText` associates the given help text with your command. In that way you don't have to manually write and maintain a separate help text for your commands.<br />
-Just write the help text for your command into the reflector and you are ready to go.
+Just write the help text for your command into the reflector and you are ready to go.<br />
 
 And by the way: this is just bash!
