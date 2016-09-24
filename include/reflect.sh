@@ -22,24 +22,20 @@ rfl_break_oo=0
 rfl_nobreak_oo=1
 
 function run() {
-  log "Called for reflect run"
   run_internal $rfl_break_oo $@
 }
 
 function runall() {
-  log "Called for reflect runall"
   run_internal $rfl_nobreak_oo $@
 }
 
 function run_internal() {
-  log "Internal reflect run reached"
   breakoo="$1"
   shift 1
   local reflectresult=0
   local allargs="$@"
   local reflector="$1"
   local reflectargs="${allargs//$reflector /}"
-  log "Requested reflector: $reflector"
   for sc in $(find $CURRENT_REFLECTORS_PATH/ -type f); do
     local reflfn="${sc/$REFLECTOR_PATH\//}"
     if [[ "$reflfn" == *".pointer" ]]; then
@@ -50,16 +46,13 @@ function run_internal() {
       CURRENT_REFLECTORS_PATH="$REFLECTORS_PATH"
       continue
     fi
-    log "Found reflector $reflfn"
     source $sc
-    log "Checking reflector"
     local reflectresult=$?
     if [ ! $reflectresult -eq 0 ]; then
       echo -e "\033[91mReflector $reflfln is invalid or failed!\033[0m"
       break
     fi
     if isReflectorExample; then
-      log "Reflector is an example, skipping."
       continue
     fi
     if [ "$REFLECTOR_NAME" == "$reflector" ] ||
@@ -68,13 +61,11 @@ function run_internal() {
       reflect $reflectargs
       reflectresult=$?
       if [ $breakoo -eq $rfl_break_oo ]; then
-        log " => Reflection of $reflfn finished"
         break
       fi
     fi
   done
   clean_reflection
-  log "Reflection result: $reflectresult"
   return $reflectresult
 }
 

@@ -38,11 +38,9 @@ function isReflectorExample() {
 
 function cmdHelpText() {
   isReflectorExample && return 0
-  logd "Associating help text with reflector $REFLECTOR_ID"
   local tcommand="$(getdynamic COMMAND_${REFLECTOR_ID}_ASSOC_CMD)"
   local command="${tcommand/-/___DASH___}"
   if [ ! -z "$(getdynamic COMMAND_${command}_HAS_HELP)" ]; then
-    logd "Help text of command $tcommand already associated."
     return 0
   fi
   declaredynamic COMMAND_${command}_HAS_HELP 1
@@ -51,7 +49,6 @@ function cmdHelpText() {
 
 function associateCmd() {
   isReflectorExample && return 0
-  logd "Associating command $1 with reflector $REFLECTOR_ID"
   local tcommand="$1"
   local command="${tcommand/-/___DASH___}"
   declaredynamic COMMAND_${command}_RUNPOINT $REFLECTOR_ID
@@ -59,11 +56,9 @@ function associateCmd() {
 }
 
 function getReflectorForCmd() {
-  logd "Retrieving reflector for command $1"
   local command="$1"
   local command="${command/-/___DASH___}"
   local refl="$(getdynamic COMMAND_${command}_RUNPOINT)"
-  logd "Found reflector \"$refl\""
   echo -n $refl
 }
 
@@ -79,10 +74,6 @@ function logt() {
 }
 
 logd "Welcome."
-logd "logd available!"
-
-logd "Logging enabled: $XDBFW_LOGD_ENABLED"
-logd "Good to go."
 
 include reflect
 include colors
