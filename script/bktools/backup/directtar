@@ -7,5 +7,7 @@ registerBackupModule directtar
 
 function reflect() {
   logt "Hello."
+  local devicepath="$1"
+  local tarfile="$2"
   return 0
 }
