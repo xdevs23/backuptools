@@ -30,7 +30,7 @@ function runall() {
 }
 
 function run_internal() {
-  breakoo="$1"
+  local breakoo="$1"
   shift 1
   local reflectresult=0
   local allargs="$@"
