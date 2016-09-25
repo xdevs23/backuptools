@@ -1,0 +1,13 @@
+#!/bin/bash
+
+reflectorName "ADB interface"
+reflectorId   "adb_interface"
+
+associateCmd "adb"
+
+function reflect() {
+  local resultcode=0
+  adb $@
+  local resultcode=$?
+  return $resultcode
+}
