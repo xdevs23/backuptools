@@ -9,5 +9,10 @@ function reflect() {
   logt "Hello."
   local devicepath="$1"
   local tarfile="$2"
-  return 0
+  local resultcode=0
+  adb_root
+  if ! [ $? -eq 0 ]; then
+    echo -e "${CL_LRED}Error: root access could not be acquired.${CL_RESET}"
+  fi
+  return $resultcode
 }
