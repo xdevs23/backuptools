@@ -7,6 +7,14 @@ function main() {
   logd "Running configuration script..."
   source $TOP/script/configure
 
+  adb_init
+  if [ $? -ne 0 ]; then
+    echo -e "${CL_YELLOW}Warning: adb initialization failed!" \
+            "Uninitialized adb or undetected devices can lead to fatal errors." \
+            "\nPlease type 'adb init' to try again." \
+            "$CL_RESET"
+  fi
+
   logd "Starting cli handling"
   local resultcode=0
   if [ -z "$1" ]; then

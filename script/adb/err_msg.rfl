@@ -1,0 +1,13 @@
+#!/bin/bash
+
+reflectorName "ADB Error Messages"
+reflectorId   "adb_err_msg"
+
+function reflect() {
+  case "$1" in
+    adb_no_root)
+     echo -e "${CL_RED}Your device does not seem to have root access.\n" \
+             "Please make sure that root access is enabled, especially for ADB"
+    ;;
+  esac
+}
