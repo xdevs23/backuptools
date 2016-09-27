@@ -68,59 +68,52 @@ function adb_init() {
   echo "Checking devices..."
   adb devices 2>&1 1>0 >/dev/null
   local adbdevc="$(adb devices -l)"
-  logt "$adbdevc"
-#  if [[ "$adbdevc" =~ .*product:.*device:.*model:.* ]]; then
-    # DO NOT TOUCH IFS!!!
-    IFS='
+  # DO NOT TOUCH IFS!!!
+  IFS='
 '
-    local counter=0
-    local stopfor=0
-    local adbdevcf=""
-    for device in $adbdevc; do
-      if [ $counter -ge 1 ]; then
-        adbdevcf="$adbdevcf[$((${counter}-1))] ${device}\n"
-        logt "Found device $device"
-      fi
-      counter=$(($counter+1))
-    done
-    logt "Counter: $counter"
-    if [ $counter -gt 2 ]; then
-        local is_not_a_number=1
-        echo "More than 1 device detected, please type in the number of the device you want to use."
-        echo -e "$adbdevcf"
-        while $is_not_a_number; do
-          local usernumber
-          read usernumber
-          ! [[ "$usernumber" =~ ^[0-9]+$ ]]
-          is_not_a_number=$?
-          [ $is_not_a_number -eq 1 ] && continue
-          local second_counter=0
-          for sdevice in $adbdevc; do
-            if [ $second_counter -eq $usernumber ]; then
-              export ADB_SELECTED_DEVICE="$(echo -n \"$sdevice\" | cut -d ' ' -f 1)"
-              echo "$ADB_SELECTED_DEVICE selected."
-              break
-            fi
-            second_counter=$(($second_counter+1))
-          done
-          unset usernumber
-          stopfor=1
-          break
-        done
-      fi
-#      counter=$(($counter+1))
-      #if [ $stopfor -eq 1 ]; then break; fi
-    # done
-    logt "counter $counter"
-    if [ $counter -le 1 ]; then
-      echo "No devices found :("
-      resultcode=1
-    elif [ $counter -eq 2 ]; then
-      echo "Found one device: $(adb_shell getprop ro.product.device)"
+  local counter=0
+  local stopfor=0
+  local adbdevcf=""
+  for device in $adbdevc; do
+    if [ $counter -ge 1 ]; then
+      adbdevcf="$adbdevcf[$((${counter}-1))] ${device}\n"
+      logt "Found device $device"
     fi
-    unset counter
-    unset IFS # PLEASE ALWAYS DO THIS
-#  fi
+    counter=$(($counter+1))
+  done
+  if [ $counter -gt 2 ]; then
+    local is_not_a_number=1
+    echo "More than 1 device detected, please type in the number of the device you want to use."
+    echo -e "$adbdevcf"
+    while $is_not_a_number; do
+      local usernumber
+      read usernumber
+      ! [[ "$usernumber" =~ ^[0-9]+$ ]]
+      is_not_a_number=$?
+      [ $is_not_a_number -eq 1 ] && continue
+      local second_counter=0
+      for sdevice in $adbdevc; do
+        if [ $second_counter -eq $usernumber ]; then
+          export ADB_SELECTED_DEVICE="$(echo -n \"$sdevice\" | cut -d ' ' -f 1)"
+          echo "$ADB_SELECTED_DEVICE selected."
+          break
+        fi
+      second_counter=$(($second_counter+1))
+      done
+      unset usernumber
+      stopfor=1
+      break
+    done
+  fi
+  logt "counter $counter"
+  if [ $counter -le 1 ]; then
+    echo "No devices found :("
+    resultcode=1
+  elif [ $counter -eq 2 ]; then
+    echo "Found one device: $(adb_shell getprop ro.product.device)"
+  fi
+  unset counter
+  unset IFS # PLEASE ALWAYS DO THIS
   return $resultcode
 }
 
