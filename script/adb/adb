@@ -65,8 +65,12 @@ function adb_init() {
     sudo adb start-server
     [ $? -eq 0 ] && break
   done
+  sleep 2
   echo "Checking devices..."
-  adb devices 2>&1 1>0 >/dev/null
+  # Just to make sure
+  for i in {1..6}; do
+    adb devices 2>&1 >/dev/null
+  done
   local adbdevc="$(adb devices -l)"
   # DO NOT TOUCH IFS!!!
   IFS='
@@ -76,7 +80,7 @@ function adb_init() {
   local adbdevcf=""
   for device in $adbdevc; do
     if [ $counter -ge 1 ]; then
-      adbdevcf="$adbdevcf[$((${counter}-1))] ${device}\n"
+      adbdevcf="$adbdevcf[${counter}] ${device}\n"
       logt "Found device $device"
     fi
     counter=$(($counter+1))
@@ -85,16 +89,17 @@ function adb_init() {
     local is_not_a_number=1
     echo "More than 1 device detected, please type in the number of the device you want to use."
     echo -e "$adbdevcf"
-    while $is_not_a_number; do
+    while [ $is_not_a_number -eq 1 ]; do
       local usernumber
+      echo -en "${EF_BOLD}Your choice: ${CL_RESET}"
       read usernumber
-      ! [[ "$usernumber" =~ ^[0-9]+$ ]]
+      [[ "$usernumber" =~ ^[0-9]+$ ]]
       is_not_a_number=$?
       [ $is_not_a_number -eq 1 ] && continue
       local second_counter=0
       for sdevice in $adbdevc; do
         if [ $second_counter -eq $usernumber ]; then
-          export ADB_SELECTED_DEVICE="$(echo -n \"$sdevice\" | cut -d ' ' -f 1)"
+          export ADB_SELECTED_DEVICE=`echo -n "$sdevice" | cut -d ' ' -f 1`
           echo "$ADB_SELECTED_DEVICE selected."
           break
         fi
