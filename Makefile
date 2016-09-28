@@ -1,4 +1,4 @@
 all:
-	@bash backuptools
+	@bash backuptools || true
 
 .PHONY: | all
