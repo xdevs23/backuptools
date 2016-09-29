@@ -11,6 +11,7 @@ function adbo() {
     additionalargs="" || \
     additionalargs="-s $ADB_SELECTED_DEVICE"
   adb $additionalargs $@
+  return $?
 }
 
 function wait-for-device() {
@@ -43,8 +44,15 @@ function adb_reboot() {
 
 function adb_root() {
   adbo root
+  if [ $? -ne 0 ]; then
+    logd "[ADB iface] Oops! Root failed..."
+    run adb_err_msg adb_failed_root
+    return 1
+  fi
+
   local who="$(adb_shell whoami)"
   if [[ "$who" != *"root"* ]]; then
+    logd "[ADB iface] Oops! No root!"
     run adb_err_msg adb_no_root
     return 1
   fi
@@ -52,6 +60,7 @@ function adb_root() {
 }
 
 function adb_init() {
+  logd "[ADB iface] adb init launched!"
   local resultcode=0
   echo -e "In order to initialize ADB correctly, sudo access is required." \
           "\nIf you are prompted for your password, please type it in" \
@@ -123,10 +132,16 @@ function adb_init() {
 }
 
 function reflect() {
+  logd "[ADB iface] Hello."
   local resultcode=0
   case "$1" in
     init|reinit|reload|detect-devices)
       adb_init;;
+    func)
+      shift
+      logd "[ADB iface] requested direct function call: $1"
+      $@
+    ;;
     *)
       adbo $@;;
   esac

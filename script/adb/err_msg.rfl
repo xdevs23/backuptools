@@ -9,5 +9,11 @@ function reflect() {
      echo -e "${CL_RED}Your device does not seem to have root access.\n" \
              "Please make sure that root access is enabled, especially for ADB"
     ;;
+    adb_failed_root)
+      echo -e "${CL_LRED}Error: root access could not be acquired.${CL_RESET}"
+    ;;
+    *)
+      logd "Warning: adb error message is unknown"
+    ;;
   esac
 }
