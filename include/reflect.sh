@@ -18,6 +18,11 @@ function log() {
   logd "[reflect] $@"
 }
 
+function logv() {
+  [ "$XDBFW_VERBOSE_LOG" == "1" ] && \
+    log "$@"
+}
+
 rfl_break_oo=0
 rfl_nobreak_oo=1
 
