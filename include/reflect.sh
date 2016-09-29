@@ -27,11 +27,18 @@ rfl_break_oo=0
 rfl_nobreak_oo=1
 
 function run() {
-  run_internal $rfl_break_oo $@
+  run_bridge $rfl_break_oo $@
 }
 
 function runall() {
-  run_internal $rfl_nobreak_oo $@
+  run_bridge $rfl_nobreak_oo $@
+}
+
+function run_bridge() {
+  local oldrflp="$CURRENT_REFLECTORS_PATH"
+  export CURRENT_REFLECTORS_PATH="$REFLECTORS_PATH"
+  run_internal $@
+  export CURRENT_REFLECTORS_PATH="$oldrflp"
 }
 
 function run_internal() {
