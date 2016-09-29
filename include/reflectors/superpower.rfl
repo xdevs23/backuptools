@@ -1,0 +1,12 @@
+#!/bin/bash
+
+reflectorName "Super Powers"
+reflectorId   "super_power"
+
+markAsExample
+associateCmd "superpower"
+
+function reflect() {
+  $@
+  return $?
+}
