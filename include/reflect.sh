@@ -46,11 +46,13 @@ function run_internal() {
     local reflfn="${sc/$REFLECTOR_PATH\//}"
     if [[ "$reflfn" == *".pointer" ]]; then
       local point="$(cat $sc)"
+      logv "Found pointer to '$point', from '$reflfn'"
       CURRENT_REFLECTORS_PATH="$TOP/$point"
       run_internal $breakoo $allargs
       CURRENT_REFLECTORS_PATH="$REFLECTORS_PATH"
       continue
     fi
+    logv "Found reflector $reflfn"
     source $sc
     local reflectresult=$?
     if [ ! $reflectresult -eq 0 ]; then
@@ -76,6 +78,7 @@ function run_internal() {
 
 function clean_reflection() {
   # Reset
+  logv "Cleaning up..."
   reflectorName
   reflectorId
   unset reflect
