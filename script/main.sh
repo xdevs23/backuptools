@@ -20,7 +20,7 @@ function main() {
   if [ -z "$1" ]; then
     run cli_handler interactive
   else
-    run cli_handler direct $@
+    run cli_handler direct $ARGS
   fi
   local resultcode=$?
 
