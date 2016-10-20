@@ -62,7 +62,7 @@ function run_internal() {
     logv "Found reflector $reflfn"
     source $sc
     local reflectresult=$?
-    if [ ! $reflectresult -eq 0 ]; then
+    if [ $reflectresult -ne 0 ]; then
       echo -e "\033[91mReflector $reflfln is invalid or failed!\033[0m"
       break
     fi
