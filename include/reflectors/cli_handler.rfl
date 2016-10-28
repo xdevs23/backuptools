@@ -45,5 +45,8 @@ function reflect() {
     cliargs="$@"
     run cmd_handler $cliargs
   fi
-  cliargs=""
+  unset ARGS
+  unset cliargs
+  unset cmd
+  unset fixrmb
 }
