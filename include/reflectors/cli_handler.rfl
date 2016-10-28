@@ -43,7 +43,7 @@ function reflect() {
   else
     shift
     cliargs="$@"
-    run cmd_handler $args
+    run cmd_handler $cliargs
   fi
   cliargs=""
 }

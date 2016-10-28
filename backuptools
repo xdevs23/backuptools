@@ -24,11 +24,11 @@ source $TOP/include/basic.sh
 source $TOP/script/config/product.config
 
 # Main entry point (must include function main)
-source $MAIN_ENTRY_POINT $@
+source $MAIN_ENTRY_POINT
 
 # Start
 mainresult=0
-main
+main $@
 mainresult=$?
 
 # kthxbye

@@ -17,7 +17,7 @@ function main() {
 
   logd "Starting cli handling"
   local resultcode=0
-  if [ -z "$1" ]; then
+  if [ -z "$ARGS" ]; then
     run cli_handler interactive
   else
     run cli_handler direct $ARGS
