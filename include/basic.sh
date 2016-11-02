@@ -83,6 +83,4 @@ include product_config
 export MAIN_COMMANDS_HELP=""
 
 doprecheck
-if [ $? -ne 0 ]; then
-  exit $?
-fi
+[ $? -ne 0 ] && exit $?
