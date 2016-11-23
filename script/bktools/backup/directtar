@@ -13,17 +13,15 @@ function reflect() {
   runall adb_interface func adb_root
   if [ $? -eq 0 ]; then
     sleep 0.2
-    adb_shell mkdir -p /tmp/backuptools/
-    adb_shell mkfifo /tmp/backuptools/bk.pipe
-    sleep 0.4
-    adb_execout "tar -cvap $devicepath 2>/tmp/backuptools/bk.pipe">$tarfile &
-    local execout_pid=$!
-    adb_shell cat /bk.pipe &
-    local bkpipe_pid=$!
-    wait $execout_pid
-    kill -9 $bkpipe_pid
+    local pipe="/data/xd__backuptools/bk.pipe"
+    adb_shell mkdir -p /data/xd__backuptools/
+    adb_shell busybox mkfifo $pipe
+    sleep 0.3
+    echo "Backing up $devicepath to $tarfile..."
+    adb exec-out 'busybox tar -cvap '"$devicepath"' 2>'"$pipe">$tarfile &
+    adb shell cat $pipe
     sleep 0.2
-    adb_shell rm -f /tmp/backuptools/bk.pipe
+    adb_shell rm -rf /data/xd__backuptools/
     echo -e "\n${CL_GREEN}Backup completed${CL_RESET}\n"
   fi
   return $resultcode
